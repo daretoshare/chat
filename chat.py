@@ -49,7 +49,7 @@ def load_LLM(openai_api_key):
     llm = OpenAI(temperature=.2, openai_api_key=openai_api_key)
     return llm
 
-st.set_page_config(page_title="Globalize Email & Translator", page_icon=":robot:")
+st.set_page_config(page_title="Formalize Email & Indian Language Translator", page_icon=":indianFlag:")
 st.header("Formalize email & Translator")
 
 col1, col2 = st.columns(2)
@@ -69,12 +69,12 @@ openai_api_key = get_api_key()
 col1, col2 = st.columns(2)
 with col1:
     option_tone = st.selectbox(
-        'Which tone would you like your email to have?',
+        'Which tone would you like your email to be converted to?',
         ('Formal', 'Informal'))
     
 with col2:
     option_dialect = st.selectbox(
-        'Which English Dialect would you like?',
+        'Which English Dialect would you like? or a translation to an Indian language',
         ('American', 'British', 'hindi', 'bengali', 'oriya'))
 
 def get_text():
@@ -89,7 +89,7 @@ if len(email_input.split(" ")) > 700:
 
 def update_text_with_example():
     print ("in updated")
-    st.session_state.email_input = "Sally I am starts work at yours monday from dave"
+    st.session_state.email_input = "Chandru, send teh file asap!"
 
 st.button("*See An Example*", type='secondary', help="Click to see an example of the email you will be converting.", on_click=update_text_with_example)
 
@@ -97,7 +97,7 @@ st.markdown("### Your Converted Email:")
 
 if email_input:
     if not openai_api_key:
-        st.warning('Please insert OpenAI API Key. Instructions [here](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key)', icon="⚠️")
+        st.warning('Please insert OpenAI API Key. Instructions [here](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key) This key will not be stored', icon="⚠️")
         st.stop()
 
     llm = load_LLM(openai_api_key=openai_api_key)
